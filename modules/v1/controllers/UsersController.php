@@ -8,7 +8,7 @@ use yii;
 
 class UsersController extends ActiveController
 {
-    public $modelClass = 'dektrium\user\models\User';
+    public $modelClass = 'app\modules\v1\models\UserApi';
     
      public $serializer = [
         'class' => 'app\components\ParseSerializer',
