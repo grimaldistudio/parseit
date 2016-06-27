@@ -10,6 +10,9 @@ $config = [
     'components' => [
         'request' => [            
             'cookieValidationKey' => 'Ul9AlRT6RiI1S2E9LdaiqWTgvHwXZL8V',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ],
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -49,12 +52,22 @@ $config = [
         'enablePrettyUrl' => true,
         //'enableStrictParsing' => true,
         'rules' => array(
-                ['class' => 'yii\rest\UrlRule', 'controller' => '1/users'],
-                '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+                [
+                    'class' => 'yii\rest\UrlRule', 
+                    'controller' => '1/users', 
+                   /* 'extraPatterns' => [
+                        'POST' => 'register'
+                        ],*/
+                ],
+             '/' => 'site/index',
+            '<action:\w+>' => 'site/<action>',
+            '<controller:\w+>/<id:\d+>' => '<controller>/view',
+            '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+            '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+               
         ),
         ],
+        
     ],
     'params' => $params,
      'modules' => [
@@ -63,6 +76,7 @@ $config = [
         ],
          'user' => [
             'class' => 'dektrium\user\Module',
+              'admins' => ['domenico']
         ],
     ],
 ];
